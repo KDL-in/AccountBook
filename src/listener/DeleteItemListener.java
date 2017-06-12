@@ -4,7 +4,6 @@ import dao.RecordsDAO;
 import frame.MFrame;
 import panel.JListPanel;
 import panel.OperatePanel;
-import util.DBUtil;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -24,8 +23,8 @@ public class DeleteItemListener implements ActionListener {
             if (row >= 0) {
                 RecordsDAO.delete((int)jListPanel.jTable.getValueAt(row,3));
                 ((DefaultTableModel) jListPanel.jTable.getModel()).removeRow(row);
-                OperatePanel.getInstance().readDefaultData();
-                OperatePanel.getInstance().updateUIData();
+                OperatePanel.getInstance().readData();
+                OperatePanel.getInstance().updateDataUI();
             }
 
         }

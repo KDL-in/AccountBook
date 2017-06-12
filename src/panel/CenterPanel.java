@@ -12,7 +12,7 @@ public class CenterPanel extends JPanel {
     private JComponent c;
     private boolean strech;
 
-    public CenterPanel(double rate, boolean strech) {
+    private CenterPanel(double rate, boolean strech) {
         this.setLayout(null);
         this.rate = rate;
         this.strech = strech;

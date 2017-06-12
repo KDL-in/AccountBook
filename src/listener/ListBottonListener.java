@@ -1,7 +1,6 @@
 package listener;
 
 import frame.MFrame;
-import panel.JChartPanel;
 import panel.JListPanel;
 
 import java.awt.event.ActionEvent;
@@ -13,7 +12,7 @@ import java.awt.event.ActionListener;
 public class ListBottonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
-        JListPanel.getInstance().updateDayInfoData();
+        JListPanel.getInstance().updateDataAndUI();
         MFrame.getInstance().setContentPane(JListPanel.getInstance());
         MFrame.getInstance().setVisible(true);
     }

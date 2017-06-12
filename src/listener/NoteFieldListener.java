@@ -1,11 +1,6 @@
 package listener;
 
-import dao.CategoryDAO;
-import dao.RecordsDAO;
-import entity.Record;
 import panel.OperatePanel;
-import util.DBUtil;
-import util.DateUtil;
 import util.GUIUtil;
 
 import java.awt.event.ActionEvent;
@@ -21,9 +16,9 @@ public class NoteFieldListener implements ActionListener {
         if (GUIUtil.checkEmpty(instance.cost, "花费")) {
             return;
         }
-        instance.updateDefaultData(Integer.parseInt(instance.cost.getText()));
+        instance.updateSpendToData(Integer.parseInt(instance.cost.getText()));
         instance.addNewRecord();
-        instance.updateUIData();
+        instance.updateDataUI();
 
 
     }

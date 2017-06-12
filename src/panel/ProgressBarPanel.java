@@ -84,7 +84,7 @@ public class ProgressBarPanel extends JPanel {
 
     }
 
-    public void setProgress(int progress) {
+    void setProgress(int progress) {
         if (progress >= miniMumProgress && progress <= maximumProgress) {
             this.progress = progress;
         }
@@ -105,6 +105,7 @@ public class ProgressBarPanel extends JPanel {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
+                        return;
                     }
                     rate += delta;
                     repaint();

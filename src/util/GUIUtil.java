@@ -11,7 +11,7 @@ import javax.swing.*;
  * Created by KundaLin on 17/5/10.
  */
 public class GUIUtil {
-    public static void showPanel(JPanel p,double strechRate) {
+    private static void showPanel(JPanel p, double strechRate) {
         GUIUtil.useSkin();
         JFrame f = new JFrame();
         f.setSize(500, 500);
@@ -26,7 +26,7 @@ public class GUIUtil {
             JPanel之类的中间容器为画布，画布要绑定在画板上，然后我们在画布上面作画。
          */
         f.setContentPane(cp);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f.setVisible(true);
         cp.show(p);
     }

@@ -13,7 +13,7 @@ public class TableBottonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         MFrame.getInstance().setContentPane(JChartPanel.getInstance());
-        JChartPanel.getInstance().isChange = true;
+        JChartPanel.getInstance().setChange();
         MFrame.getInstance().setVisible(true);
     }
 }

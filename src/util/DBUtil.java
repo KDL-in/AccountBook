@@ -1,6 +1,5 @@
 package util;
 
-import dao.BudgetDAO;
 import dao.CategoryDAO;
 import dao.RecordsDAO;
 import dao.TempCategorysDAO;
@@ -10,8 +9,6 @@ import entity.TempCategory;
 
 import java.sql.*;
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -24,12 +21,10 @@ public class DBUtil {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection("jdbc:sqlserver://127.0.0.1:1433;DatabaseName=WalletDB", "kundalin", "123");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-    }
+}
 
     public static Connection getConnection() {
         return connection;
@@ -67,7 +62,7 @@ public class DBUtil {
     }
 
     public static void main(String[] args) {
-//        readDefaultData();
+//        readData();
     }
 
     public static void backup(String bakPath) {

@@ -2,7 +2,6 @@ package listener;
 
 import panel.JListPanel;
 import panel.OperatePanel;
-import util.DBUtil;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -17,7 +16,7 @@ public class ListTableModelListener implements TableModelListener {
         int row = e.getFirstRow();
         int rid = (Integer) JListPanel.getInstance().jTable.getValueAt(row, 3);
         JListPanel.getInstance().change(rid, e.getColumn(),JListPanel.getInstance().jTable.getValueAt(row, e.getColumn()));
-        OperatePanel.getInstance().readDefaultData();
-        OperatePanel.getInstance().updateUIData();
+        OperatePanel.getInstance().readData();
+        OperatePanel.getInstance().updateDataUI();
     }
 }

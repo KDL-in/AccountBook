@@ -22,7 +22,7 @@ public class noteItemListener implements ActionListener {
             Record r = RecordsDAO.inquryRid(rid);
             String newNote = JOptionPane.showInputDialog(r.note+" ->");
             jListPanel.change(rid,3,newNote);
-            jListPanel.updateDayInfoData();
+            jListPanel.updateDataAndUI();
         }
     }
 }

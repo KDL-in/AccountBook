@@ -9,7 +9,6 @@ import entity.Record;
 import entity.TempCategory;
 import listener.*;
 import util.ColorUtil;
-import util.DBUtil;
 import util.DateUtil;
 import util.FontUtil;
 
@@ -27,8 +26,8 @@ public class OperatePanel extends JPanel {
     private JPanel UPanel, DPanel,infoPanel,inputPanel;
     private JLabel costLabel,noteLabel,avgLabel,avg, remainLabel, remain,todayCostLabel,todayCost;
     public JTextField cost,note;
-    public JComboBox type;
-    public Record readRecord;
+    private JComboBox type;
+    private Record readRecord;
     private JButton table ,list ,setting;
 
     public int budget;
@@ -54,11 +53,11 @@ public class OperatePanel extends JPanel {
         add(DPanel, BorderLayout.SOUTH);
         //读取数据
         readRecord = new Record();
-        readDefaultData();
-        updateUIData();//更新UI数据
+        readData();
+        updateDataUI();//更新UI数据
     }
 
-    public void updateUIData() {
+    public void updateDataUI() {
         todayCost.setText(todayTotalSpend + "¥");
         remain.setText(remainBudget+"¥");
         avg.setText((remainBudget / daysToMonthEnd)+"¥");
@@ -179,7 +178,7 @@ public class OperatePanel extends JPanel {
         instance.cost.grabFocus();
     }
 
-    public  void readDefaultData() {//启动时读取默认数据
+    public  void readData() {//启动时读取默认数据
         budget = BudgetDAO.getBudget();
         daysToMonthEnd = DateUtil.daysToMonthEnd();
         thisMonthTotalSpend = RecordsDAO.getThisMonthTotalSpend();
@@ -188,7 +187,7 @@ public class OperatePanel extends JPanel {
 //        System.out.println(todayTotalSpend);
     }
 
-    public  void updateDefaultData(int spend) {//每次记录新消费后更新一些默认数据
+    public  void updateSpendToData(int spend) {//每次记录新消费后更新一些默认数据
         thisMonthTotalSpend += spend;
         remainBudget = budget - thisMonthTotalSpend;
         todayTotalSpend += spend;

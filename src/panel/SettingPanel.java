@@ -27,10 +27,12 @@ public class SettingPanel extends JPanel {
 
     public JTextField budgetSettingField;
 
-    public JButton okButton, applyButton, cancelButton;
+    private JButton okButton;
+    public JButton applyButton;
+    public JButton cancelButton;
     public JTable jTable;
 
-    public JButton addButton, resetButton, deleButton;
+    private JButton addButton, resetButton, deleButton;
     private JButton bakButton, recButton;
 
     //data
@@ -259,8 +261,7 @@ public class SettingPanel extends JPanel {
     public boolean isRecPathIllegal() {
         if(recPath==null) return true;
         String name = recPath.substring(recPath.length()-6);
-        if(name.compareTo("DB.bak")!=0) return true;
-        return false;
+        return name.compareTo("DB.bak") != 0;
     }
 
     public String getRecPath() {
@@ -281,7 +282,7 @@ class MySettingTableModel extends DefaultTableModel {
         return column == 1;
     }
 
-    public MySettingTableModel(Object[] colNames, int i) {
+    MySettingTableModel(Object[] colNames, int i) {
         super(colNames, i);
     }
 }

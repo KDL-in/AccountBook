@@ -7,7 +7,7 @@ import java.util.Date;
  * Created by KundaLin on 17/6/6.
  */
 public class DateUtil {
-    public static final long MILLISECOND_OF_ONE_DAY = 1000 * 60 * 60 * 24;
+    static final long MILLISECOND_OF_ONE_DAY = 1000 * 60 * 60 * 24;
 
 
     public static Date today() {

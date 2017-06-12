@@ -16,7 +16,7 @@ public class BarLabelListener extends MouseAdapter {
         JChartPanel.getInstance().isBar = true;
         JChartPanel.getInstance().barLabel.setBackground(ColorUtil.BORDER);
         JChartPanel.getInstance().pieLabel.setBackground(ColorUtil.BG);
-        JChartPanel.getInstance().updateChart();
+        JChartPanel.getInstance().updateDataUI();
 
     }
 }

@@ -25,7 +25,7 @@ public class MFrame extends JFrame {
         return mFrame;
     }
     private MFrame() throws HeadlessException {
-//        OperatePanel.getInstance().readDefaultData();
+//        OperatePanel.getInstance().readData();
     }
 //设置主面板
     public void setMainPanel() {

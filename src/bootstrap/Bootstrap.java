@@ -23,7 +23,7 @@ public class Bootstrap {
                 MFrame mFrame = MFrame.getInstance();
                 mFrame.setLayout(new BorderLayout());
                 mFrame.setResizable(false);
-                mFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                mFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                 mFrame.setMainPanel();
                 mFrame.pack();
                 mFrame.setLocationRelativeTo(null);

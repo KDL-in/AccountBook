@@ -22,15 +22,15 @@ public class JListPanel extends JPanel {
     private static JListPanel instance;
     private JLabel backLabel;
 
-    public MyTableModel listTableModel;
+    private MyTableModel listTableModel;
     public JTable jTable;
     public JPopupMenu jPopupMenu;
-    public JMenuItem deleteItem,noteItem;
+    private JMenuItem deleteItem,noteItem;
 
     List<Record> recordList;
     public JComboBox jComboBox;
 
-    HashMap<String, Integer> cnameTocid;
+    private HashMap<String, Integer> cnameTocid;
 
     private Object[] namesOfHeader = {"时间", "花费", "类型","编号"};
 
@@ -78,7 +78,7 @@ public class JListPanel extends JPanel {
         listTableModel = new MyTableModel(namesOfHeader,0);
 
         jTable = new JTable(listTableModel);
-        updateDayInfoData();
+        updateDataAndUI();
         JScrollPane jScrollPane = new JScrollPane(jTable);
         jScrollPane.setBackground(ColorUtil.BG);
         //样式
@@ -123,7 +123,7 @@ public class JListPanel extends JPanel {
         titlePanel.add(titleLabel);
         add(titlePanel, BorderLayout.NORTH);
     }
-    public void updateDayInfoData() {//更新数据
+    public void updateDataAndUI() {//更新数据和界面
         recordList = RecordsDAO.getThisMonthList();
         Object[][] data = new Object[recordList.size()][4];
 
@@ -204,7 +204,7 @@ class MyTableModel extends DefaultTableModel {
         super();
     }
 
-    public MyTableModel(Object[] namesOfHeader, int i) {
+    MyTableModel(Object[] namesOfHeader, int i) {
         super(namesOfHeader,i);
     }
 

@@ -20,17 +20,17 @@ public class MainPanel extends JPanel {
         return instance;
     }
 
-    public void init() {
+    private void init() {
         addProgressBarPanel();
         addInputPanel();
     }
     //输入面板
-    public  void addInputPanel() {
+    private   void addInputPanel() {
         OperatePanel operatePanel = OperatePanel.getInstance();
         add(operatePanel, BorderLayout.SOUTH);
     }
     //进度条面板
-    public  void addProgressBarPanel() {
+    private   void addProgressBarPanel() {
         ProgressBarPanel progressBarPanel = ProgressBarPanel.getInstance();
         add(progressBarPanel,BorderLayout.CENTER);
     }

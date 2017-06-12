@@ -1,11 +1,8 @@
 package listener;
 
-import frame.MFrame;
 import panel.JChartPanel;
 import util.ColorUtil;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -19,6 +16,6 @@ public class PieLabelListener extends MouseAdapter {
         JChartPanel.getInstance().isBar = false;
         JChartPanel.getInstance().pieLabel.setBackground(ColorUtil.BORDER);
         JChartPanel.getInstance().barLabel.setBackground(ColorUtil.BG);
-        JChartPanel.getInstance().updateChart();
+        JChartPanel.getInstance().updateDataUI();
     }
 }

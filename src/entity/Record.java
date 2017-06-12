@@ -9,8 +9,4 @@ public class Record {
     public int rid,cid,spend;
     public String note;
     public Date rdate;
-
-    public Record() {
-
-    }
 }

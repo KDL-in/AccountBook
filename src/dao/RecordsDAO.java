@@ -54,11 +54,11 @@ public class RecordsDAO {
     }
 
 
-    public static List<Record> getTodayList() {
+    private static List<Record> getTodayList() {
         return getList(DateUtil.utilToSQL(DateUtil.today()));
     }
 
-    public static List<Record> getList(Date left, Date right) {
+    private static List<Record> getList(Date left, Date right) {
         List<Record> result = new ArrayList<>();
         try {
             Connection connection = DBUtil.getConnection();
@@ -82,7 +82,7 @@ public class RecordsDAO {
         return result;
     }
 
-    public static List<Record> getList(Date date) {
+    private static List<Record> getList(Date date) {
         return getList(date,date);
     }
 

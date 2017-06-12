@@ -31,11 +31,10 @@ import java.util.*;
 import java.util.List;
 
 public class JChartPanel extends JPanel {
-    private JPanel selectLabelPanel, labelPanel;
     public JLabel barLabel, pieLabel, backLabel;
     private static JChartPanel instance;
     public boolean isBar;//标记当前是否显示柱状图
-    public boolean isChange;//标记当前数据是否更改
+    private boolean isChange;//标记当前数据是否更改
     private ChartPanel barChartPanel, pieChartPane;
     //chart data
     private HashMap<Integer,String> cidTocname;
@@ -52,8 +51,8 @@ public class JChartPanel extends JPanel {
     }
 
 
-    public void updateChart() {// 判断是否需要更新图表
-        if (isChange) {
+    public void updateDataUI() {
+        if (isChange) {// 判断是否需要更新图表
             readData();
             setBarChart();
             setPieChart();
@@ -86,7 +85,7 @@ public class JChartPanel extends JPanel {
         piePlot.setLabelGenerator(new StandardPieSectionLabelGenerator("{0}={1}({2})",
                 NumberFormat.getNumberInstance(), new DecimalFormat("0.00%")));//百分比
         piePlot.setBaseSectionOutlinePaint(Color.white);//轮廓颜色
-        piePlot.setSectionOutlineStroke(new BasicStroke(1));
+//        piePlot.setSectionOutlineStroke(new BasicStroke(1));
         piePlot.setShadowPaint(ColorUtil.BORDER);//阴影颜色
         piePlot.setLabelBackgroundPaint(ColorUtil.BORDER);//以下标签设置
         piePlot.setLabelOutlinePaint(Color.white);
@@ -159,7 +158,7 @@ public class JChartPanel extends JPanel {
         setLayout(new BorderLayout());
         setLabelPanel();
         isChange = isBar = true;
-        updateChart();
+        updateDataUI();
 
     }
 
@@ -178,13 +177,13 @@ public class JChartPanel extends JPanel {
     }
 
     private void setLabelPanel() {
-        labelPanel = new JPanel(new BorderLayout());
+        JPanel labelPanel = new JPanel(new BorderLayout());
 
         backLabel = new JLabel(ImageUtil.backIcon);
         labelPanel.add(backLabel, BorderLayout.WEST);
         backLabel.addMouseListener(new ChartBackLabelListener());
 
-        selectLabelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        JPanel selectLabelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         selectLabelPanel.setBorder(new EmptyBorder(10, 0, 10, 0));
         barLabel = new JLabel("BAR", SwingConstants.CENTER);
         pieLabel = new JLabel("PIE", SwingConstants.CENTER);
@@ -206,4 +205,7 @@ public class JChartPanel extends JPanel {
         labelPanel.add(selectLabelPanel, BorderLayout.CENTER);
     }
 
+    public void setChange() {
+        isChange = true;
+    }
 }
