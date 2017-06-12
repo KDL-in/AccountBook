@@ -13,6 +13,6 @@ public class ResetButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         SettingPanel instance = SettingPanel.getInstance();
         instance.resetTempCategory();
-        instance.TableChange();
+        instance.changeTable();
     }
 }

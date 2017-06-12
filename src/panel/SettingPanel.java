@@ -202,7 +202,7 @@ public class SettingPanel extends JPanel {
         recPath = null;
     }
 
-    public void TableChange() {
+    public void changeTable() {
         typesChanged = true;
     }
 

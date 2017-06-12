@@ -14,7 +14,7 @@ public class DeleteButtonListener implements ActionListener {
         int row = SettingPanel.getInstance().jTable.getSelectedRow();
         if (row >= 0) {
             SettingPanel.getInstance().settingTableModel.removeRow(row);
-            SettingPanel.getInstance().TableChange();
+            SettingPanel.getInstance().changeTable();
         }
 
     }

@@ -20,7 +20,7 @@ public class SettingTableModelListener implements TableModelListener {
             SettingPanel.getInstance().settingTableModel.setValueAt(0,e.getFirstRow(),1);
             return;
         }
-        SettingPanel.getInstance().TableChange();
+        SettingPanel.getInstance().changeTable();
 
     }
 }

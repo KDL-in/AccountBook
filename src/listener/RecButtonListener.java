@@ -22,6 +22,6 @@ public class RecButtonListener implements ActionListener {
         DBUtil.recovery(instance.getRecPath());
         //更新界面数据
         instance.updateUIData();
-        instance.TableChange();
+        instance.changeTable();
     }
 }

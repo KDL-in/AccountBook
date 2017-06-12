@@ -42,10 +42,10 @@ public class OperatePanel extends JPanel {
     }
 
     private OperatePanel() {
-        initCompents();
-        addCompentsListener();
-        setCompentsStyle();
-        addAllCompents();
+        initComponents();
+        addComponentsListener();
+        setComponentsStyle();
+        addAllComponents();
 
         setBorder(new EmptyBorder(10,30,10,30));
         setLayout(new BorderLayout(0,10));
@@ -75,7 +75,7 @@ public class OperatePanel extends JPanel {
         }
     }
 
-    private void addCompentsListener() {
+    private void addComponentsListener() {
         table.addActionListener(new TableBottonListener());
         list.addActionListener(new ListBottonListener());
         setting.addActionListener(new SettingButtonListener());
@@ -84,7 +84,7 @@ public class OperatePanel extends JPanel {
 
     }
 
-    private void addAllCompents() {
+    private void addAllComponents() {
         inputPanel.add(costLabel);
         inputPanel.add(cost);
         inputPanel.add(noteLabel);
@@ -105,7 +105,7 @@ public class OperatePanel extends JPanel {
         DPanel.add(setting);
     }
 
-    private void setCompentsStyle() {
+    private void setComponentsStyle() {
         //消费类型,输入框样式
         TitledBorder titledBorder = new TitledBorder("Today");
         UPanel.setBorder(titledBorder);
@@ -132,7 +132,7 @@ public class OperatePanel extends JPanel {
 
     }
 
-    private void initCompents() {
+    private void initComponents() {
         costLabel = new JLabel("COST");
         cost = new JTextField(5);
         noteLabel = new JLabel("NOTE");

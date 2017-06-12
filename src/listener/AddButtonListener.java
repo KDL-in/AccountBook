@@ -24,7 +24,7 @@ public class AddButtonListener implements ActionListener {
             }
             Object o[]={newType,0};
             instance.settingTableModel.insertRow(row,o);
-            instance.TableChange();
+            instance.changeTable();
         }
     }
 }

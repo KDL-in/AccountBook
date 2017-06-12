@@ -179,12 +179,12 @@ class MyRender extends DefaultTableCellRenderer {
             List<Record> r = JListPanel.getInstance().recordList;
             ((JLabel)cell).setToolTipText(r.get(r.size()-1-row).note);
         }
-        this.setColor(cell, table, isSelected, hasFocus, row, column);
+        this.setColor(cell, isSelected, hasFocus, row, column);
         setHorizontalAlignment(CENTER);
         return cell;
     }
 
-    private void setColor(Component component, JTable table, boolean isSelected, boolean hasFocus, int row, int column) {
+    private void setColor(Component component, boolean isSelected, boolean hasFocus, int row, int column) {
         if (isSelected) {
             component.setBackground(ColorUtil.BORDER);
         } else {
@@ -200,10 +200,6 @@ class MyRender extends DefaultTableCellRenderer {
 
 class MyTableModel extends DefaultTableModel {
     //重写不可编辑
-    public MyTableModel() {
-        super();
-    }
-
     MyTableModel(Object[] namesOfHeader, int i) {
         super(namesOfHeader,i);
     }
