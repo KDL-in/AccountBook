@@ -1,5 +1,7 @@
 package util;
 
+import dao.RecordsDAO;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -52,8 +54,8 @@ public class DateUtil {
 
     public static int daysFromMonthBegin() {
         long toDayMilliSeconds = today().getTime();
-        long firstdayMilliSeconds = monthBegin().getTime();
-        return (int) ((toDayMilliSeconds - firstdayMilliSeconds) / MILLISECOND_OF_ONE_DAY) + 1;
+        long firstDayMilliSeconds = monthBegin().getTime();
+        return (int) ((toDayMilliSeconds - firstDayMilliSeconds) / MILLISECOND_OF_ONE_DAY) + 1;
     }
 
     public static void main(String[] args) {
@@ -68,10 +70,23 @@ public class DateUtil {
         return new java.sql.Date(d.getTime());
     }
 
-    public static int getDay(java.sql.Date rdate) {
+    public static int getDay(Date date) {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(rdate);
+        calendar.setTime(date);
         return calendar.get(Calendar.DAY_OF_MONTH);
 
     }
+    public static int getYear(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.YEAR);
+
+    }
+
+    public static int getMonth(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.MONTH);
+    }
+
 }

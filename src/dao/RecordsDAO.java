@@ -86,7 +86,7 @@ public class RecordsDAO {
         return getList(date,date);
     }
 
-    public static Record inquryRid(int rid) {
+    public static Record queryRid(int rid) {
         Record result = new Record();
         try {
             Connection connection = DBUtil.getConnection();
@@ -160,6 +160,25 @@ public class RecordsDAO {
         return lastAddDate;
     }
 
+
+    public static Date getFirstAdd() {
+        Date firstAddDate = null;
+        try {
+            Connection connection = DBUtil.getConnection();
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("select Min(rdate) from Records");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                firstAddDate = resultSet.getDate(1);
+            }
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return firstAddDate;
+
+    }
+
     //插入测试数据
     public static void main(String[] args) {
 /*        Record record = new Record();
@@ -176,7 +195,7 @@ public class RecordsDAO {
             record.rdate = DateUtil.utilToSQL(c.getTime());
             add(record);
         }*/
-      /*  Record r = inquryRid(3);
+      /*  Record r = queryRid(3);
         System.out.println(r.spend);*/
         System.out.println(getLastAdd());
     }

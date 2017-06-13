@@ -7,11 +7,16 @@ import entity.Category;
 import entity.Record;
 import entity.TempCategory;
 import listener.*;
+import org.jb2011.lnf.beautyeye.ch3_button.BEButtonUI;
 import util.*;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormatSymbols;
 import java.util.*;
 import java.util.List;
 
@@ -25,14 +30,14 @@ public class JListPanel extends JPanel {
     private MyTableModel listTableModel;
     public JTable jTable;
     public JPopupMenu jPopupMenu;
-    private JMenuItem deleteItem,noteItem;
+    private JMenuItem deleteItem, noteItem;
 
     List<Record> recordList;
     public JComboBox jComboBox;
 
     private HashMap<String, Integer> cnameTocid;
 
-    private Object[] namesOfHeader = {"时间", "花费", "类型","编号"};
+    private Object[] namesOfHeader = {"时间", "花费", "类型", "编号"};
 
 
     public static JListPanel getInstance() {
@@ -40,6 +45,7 @@ public class JListPanel extends JPanel {
             instance = new JListPanel();
         return instance;
     }
+
     private JListPanel() {
         setLayout(new BorderLayout(0, 0));
         setTitlePanel();
@@ -51,14 +57,15 @@ public class JListPanel extends JPanel {
         backLabel.addMouseListener(new ListBackLabelListener());
         listTableModel.addTableModelListener(new ListTableModelListener());
         //右键菜单
-        jTable.addMouseListener(new RightMouseBottonListener());
+        jTable.addMouseListener(new RightMouseButtonListener());
         deleteItem.addActionListener(new DeleteItemListener());
         noteItem.addActionListener(new noteItemListener());
-        //改变提示后更新提示
-
+        //表头月份选择
+        jTable.getTableHeader().addMouseListener(new TableHeaderListener());
     }
+
     public void change(int rid, int column, Object valueAt) {
-        Record newRecord =new Record();
+        Record newRecord = new Record();
         newRecord.rid = rid;
         switch (column) {
             case 1:
@@ -68,14 +75,15 @@ public class JListPanel extends JPanel {
                 newRecord.cid = cnameTocid.get(valueAt);
                 break;
             case 3:
-                newRecord.note =(String)valueAt;
+                newRecord.note = (String) valueAt;
                 break;
         }
         RecordsDAO.alter(newRecord);
     }
+
     private void scrollPanel() {
         //数据
-        listTableModel = new MyTableModel(namesOfHeader,0);
+        listTableModel = new MyTableModel(namesOfHeader, 0);
 
         jTable = new JTable(listTableModel);
         updateDataAndUI();
@@ -110,6 +118,7 @@ public class JListPanel extends JPanel {
 
 
     }
+
     private void setTitlePanel() {//明细标题栏
         JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         backLabel = new JLabel(ImageUtil.backWhiteIcon);
@@ -123,6 +132,7 @@ public class JListPanel extends JPanel {
         titlePanel.add(titleLabel);
         add(titlePanel, BorderLayout.NORTH);
     }
+
     public void updateDataAndUI() {//更新数据和界面
         recordList = RecordsDAO.getThisMonthList();
         Object[][] data = new Object[recordList.size()][4];
@@ -175,9 +185,9 @@ class MyRender extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component cell = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        if(table.getValueAt(row,column).getClass()==String.class){//提示
+        if (table.getValueAt(row, column).getClass() == String.class) {//提示
             List<Record> r = JListPanel.getInstance().recordList;
-            ((JLabel)cell).setToolTipText(r.get(r.size()-1-row).note);
+            ((JLabel) cell).setToolTipText(r.get(r.size() - 1 - row).note);
         }
         this.setColor(cell, isSelected, hasFocus, row, column);
         setHorizontalAlignment(CENTER);
@@ -201,7 +211,7 @@ class MyRender extends DefaultTableCellRenderer {
 class MyTableModel extends DefaultTableModel {
     //重写不可编辑
     MyTableModel(Object[] namesOfHeader, int i) {
-        super(namesOfHeader,i);
+        super(namesOfHeader, i);
     }
 
     @Override
@@ -214,3 +224,4 @@ class MyTableModel extends DefaultTableModel {
         return getColumnClass(column) != java.sql.Date.class;
     }
 }
+

@@ -10,7 +10,7 @@ import java.awt.event.MouseListener;
 /**
  * Created by KundaLin on 17/6/8.
  */
-public class RightMouseBottonListener extends MouseAdapter {
+public class RightMouseButtonListener extends MouseAdapter {
     @Override
     public void mousePressed(MouseEvent e) {
         super.mousePressed(e);

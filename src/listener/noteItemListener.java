@@ -19,7 +19,7 @@ public class noteItemListener implements ActionListener {
         int row = jListPanel.jTable.getSelectedRow();
         if (row >= 0) {
             int rid = (Integer) JListPanel.getInstance().jTable.getValueAt(row, 3);
-            Record r = RecordsDAO.inquryRid(rid);
+            Record r = RecordsDAO.queryRid(rid);
             String newNote = JOptionPane.showInputDialog(r.note+" ->");
             jListPanel.change(rid,3,newNote);
             jListPanel.updateDataAndUI();
