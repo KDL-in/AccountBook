@@ -5,8 +5,8 @@ import util.DBUtil;
 import util.DateUtil;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Date;
+import java.util.*;
 
 /**
  * Created by KundaLin on 17/6/5.
@@ -82,9 +82,17 @@ public class RecordsDAO {
         return result;
     }
 
+    public static List<Record> getListBetweenTheMouth(int year, int month) {
+        java.util.Date left = DateUtil.monthBegin(year, month);
+        java.util.Date right = DateUtil.monthEnd(year, month);
+        return getList(DateUtil.utilToSQL(left),DateUtil.utilToSQL(right));
+    }
+
     private static List<Record> getList(Date date) {
         return getList(date,date);
     }
+
+
 
     public static Record queryRid(int rid) {
         Record result = new Record();
@@ -106,8 +114,6 @@ public class RecordsDAO {
         }
         return result;
     }
-
-
 
     public static void alter(Record newRecord) {
         try {
@@ -143,6 +149,7 @@ public class RecordsDAO {
         }
     }
 
+
     public static Date getLastAdd() {//最后更新时间
         Date lastAddDate = null;
         try {
@@ -159,7 +166,6 @@ public class RecordsDAO {
         }
         return lastAddDate;
     }
-
 
     public static Date getFirstAdd() {
         Date firstAddDate = null;
@@ -181,12 +187,14 @@ public class RecordsDAO {
 
     //插入测试数据
     public static void main(String[] args) {
-/*        Record record = new Record();
-        for(int i = 1; i < 7; i++) {
+   /*     Record record = new Record();
+        for(int i = 1; i < 20; i++) {
             record.cid =4;
-            record.spend=12;
+            record.spend=10;
             Calendar c = Calendar.getInstance();
-            c.setTime(new Date());
+            c.setTime(new java.util.Date());
+            c.set(Calendar.YEAR, 2017);
+            c.set(Calendar.MONTH,4);
             c.set(Calendar.DATE, i);
             c.set(Calendar.HOUR_OF_DAY,0);
             c.set(Calendar.MINUTE,0);
@@ -197,6 +205,6 @@ public class RecordsDAO {
         }*/
       /*  Record r = queryRid(3);
         System.out.println(r.spend);*/
-        System.out.println(getLastAdd());
+//        System.out.println(getLastAdd());
     }
 }

@@ -18,6 +18,7 @@ public class TableHeaderListener extends MouseAdapter {
         super.mouseClicked(e);
         if (e.getClickCount() == 2&& col==0) {
             DateSelectFrame dateSelectFrame = DateSelectFrame.getInstance();
+            dateSelectFrame.setVisible(true);
         }
     }
 }

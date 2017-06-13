@@ -133,8 +133,17 @@ public class JListPanel extends JPanel {
         add(titlePanel, BorderLayout.NORTH);
     }
 
-    public void updateDataAndUI() {//更新数据和界面
-        recordList = RecordsDAO.getThisMonthList();
+    public void updateDataAndUI() {
+        Date today = DateUtil.today();
+        updateDataAndUI(DateUtil.getYear(today),DateUtil.getMonth(today));
+    }
+    public void updateDataAndUI(int year,int month) {//更新数据和界面
+        if (year == 0 && month == 0) {
+            Date date =(Date)jTable.getValueAt(0, 0);
+            year = DateUtil.getYear(date);
+            month = DateUtil.getMonth(date);
+        }
+        recordList = RecordsDAO.getListBetweenTheMouth(year,month);
         Object[][] data = new Object[recordList.size()][4];
 
         //cid to cname

@@ -5,6 +5,8 @@ import dao.RecordsDAO;
 import java.util.Calendar;
 import java.util.Date;
 
+import static java.util.Calendar.*;
+
 /**
  * Created by KundaLin on 17/6/6.
  */
@@ -13,46 +15,61 @@ public class DateUtil {
 
 
     public static Date today() {
-        Calendar c = Calendar.getInstance();
+        Calendar c = getInstance();
         c.setTime(new Date());
-        c.set(Calendar.HOUR,0);
-        c.set(Calendar.MINUTE,0);
-        c.set(Calendar.SECOND,0);
-        c.set(Calendar.MILLISECOND,0);
+        c.set(HOUR, 0);
+        c.set(MINUTE, 0);
+        c.set(SECOND, 0);
+        c.set(MILLISECOND, 0);
+        return c.getTime();
+    }
+
+    public static Date monthBegin(int year, int month) {
+        Calendar c = getInstance();
+        c.setTime(new Date());
+        c.set(YEAR, year);
+        c.set(MONTH, month);
+        c.set(DATE, 1);
+        c.set(HOUR_OF_DAY, 0);
+        c.set(MINUTE, 0);
+        c.set(SECOND, 0);
+        c.set(MILLISECOND, 0);
+        return c.getTime();
+    }
+
+    public static Date monthEnd(int year, int month) {
+        Calendar c = getInstance();
+        c.setTime(new Date());
+        c.set(YEAR, year);
+        c.set(MONTH, month);
+        c.set(HOUR, 0);
+        c.set(MINUTE, 0);
+        c.set(SECOND, 0);
+        c.set(MILLISECOND, 0);
+
+        c.set(DATE, 1);
+        c.add(MONDAY, 1);
+        c.add(DATE, -1);
         return c.getTime();
     }
 
     public static Date monthBegin() {
-        Calendar c = Calendar.getInstance();
-        c.setTime(new Date());
-        c.set(Calendar.DATE, 1);
-        c.set(Calendar.HOUR_OF_DAY,0);
-        c.set(Calendar.MINUTE,0);
-        c.set(Calendar.SECOND,0);
-        c.set(Calendar.MILLISECOND,0);
-        return c.getTime();
+        Date today = today();
+        return monthBegin(getYear(today),getMonth(today));
     }
 
-    public static Date monthEnd() {
-        Calendar c = Calendar.getInstance();
-        c.setTime(new Date());
-        c.set(Calendar.HOUR, 0);
-        c.set(Calendar.MINUTE, 0);
-        c.set(Calendar.SECOND, 0);
-
-        c.set(Calendar.DATE, 1);
-        c.add(Calendar.MONDAY, 1);
-        c.add(Calendar.DATE, -1);
-        return c.getTime();
+    private static Date monthEnd() {
+        Date today = today();
+        return monthEnd(getYear(today),getMonth(today));
     }
 
     public static int daysToMonthEnd() {
         long lastDayMilliSeconds = monthEnd().getTime();
         long toDayMilliSeconds = today().getTime();
-        return (int)((lastDayMilliSeconds-toDayMilliSeconds)/MILLISECOND_OF_ONE_DAY)+1;
+        return (int) ((lastDayMilliSeconds - toDayMilliSeconds) / MILLISECOND_OF_ONE_DAY) + 1;
     }
 
-    public static int daysFromMonthBegin() {
+    private static int daysFromMonthBegin() {
         long toDayMilliSeconds = today().getTime();
         long firstDayMilliSeconds = monthBegin().getTime();
         return (int) ((toDayMilliSeconds - firstDayMilliSeconds) / MILLISECOND_OF_ONE_DAY) + 1;
@@ -71,22 +88,23 @@ public class DateUtil {
     }
 
     public static int getDay(Date date) {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = getInstance();
         calendar.setTime(date);
-        return calendar.get(Calendar.DAY_OF_MONTH);
+        return calendar.get(DAY_OF_MONTH);
 
     }
+
     public static int getYear(Date date) {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = getInstance();
         calendar.setTime(date);
-        return calendar.get(Calendar.YEAR);
+        return calendar.get(YEAR);
 
     }
 
     public static int getMonth(Date date) {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = getInstance();
         calendar.setTime(date);
-        return calendar.get(Calendar.MONTH);
+        return calendar.get(MONTH);
     }
 
 }
