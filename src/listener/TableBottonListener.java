@@ -12,8 +12,9 @@ import java.awt.event.ActionListener;
 public class TableBottonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
+        JChartPanel.getInstance().setChange();//面板更新
+        JChartPanel.getInstance().updateDataUI();
         MFrame.getInstance().setContentPane(JChartPanel.getInstance());
-        JChartPanel.getInstance().setChange();
         MFrame.getInstance().setVisible(true);
     }
 }

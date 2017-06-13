@@ -43,7 +43,7 @@ public class OperatePanel extends JPanel {
 
     private OperatePanel() {
         initComponents();
-        addComponentsListener();
+        addListener();
         setComponentsStyle();
         addAllComponents();
 
@@ -75,7 +75,7 @@ public class OperatePanel extends JPanel {
         }
     }
 
-    private void addComponentsListener() {
+    private void addListener() {
         table.addActionListener(new TableBottonListener());
         list.addActionListener(new ListBottonListener());
         setting.addActionListener(new SettingButtonListener());
