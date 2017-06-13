@@ -61,9 +61,9 @@ public class DBUtil {
 
     }
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
 //        readData();
-    }
+    }*/
 
     public static void backup(String bakPath) {
         bakPath += "\\DB.bak";

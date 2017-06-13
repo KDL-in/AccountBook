@@ -186,8 +186,8 @@ public class RecordsDAO {
     }
 
     //插入测试数据
-    public static void main(String[] args) {
-   /*     Record record = new Record();
+   /* public static void main(String[] args) {
+   *//*     Record record = new Record();
         for(int i = 1; i < 20; i++) {
             record.cid =4;
             record.spend=10;
@@ -202,9 +202,9 @@ public class RecordsDAO {
             c.set(Calendar.MILLISECOND,0);
             record.rdate = DateUtil.utilToSQL(c.getTime());
             add(record);
-        }*/
-      /*  Record r = queryRid(3);
-        System.out.println(r.spend);*/
+        }*//*
+      *//*  Record r = queryRid(3);
+        System.out.println(r.spend);*//*
 //        System.out.println(getLastAdd());
-    }
+    }*/
 }

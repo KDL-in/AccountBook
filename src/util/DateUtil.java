@@ -75,13 +75,13 @@ public class DateUtil {
         return (int) ((toDayMilliSeconds - firstDayMilliSeconds) / MILLISECOND_OF_ONE_DAY) + 1;
     }
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         System.out.println(today());
         System.out.println(monthBegin());
         System.out.println(monthEnd());
         System.out.println(daysFromMonthBegin());
         System.out.println(daysToMonthEnd());
-    }
+    }*/
 
     public static java.sql.Date utilToSQL(Date d) {
         return new java.sql.Date(d.getTime());
