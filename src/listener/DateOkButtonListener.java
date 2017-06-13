@@ -1,6 +1,7 @@
 package listener;
 
 import frame.DateSelectFrame;
+import panel.JChartPanel;
 import panel.JListPanel;
 
 import javax.swing.*;
@@ -18,7 +19,12 @@ public class DateOkButtonListener implements ActionListener {
                 instance.updateDataUI();
                 return;
             }
-            JListPanel.getInstance().updateDataAndUI(curYear,curMonth);
+            //面板更新
+            JListPanel.getInstance().updateDataAndUI(curYear, curMonth);
+            JChartPanel.getInstance().setChange();
+            JChartPanel.getInstance().updateDataUI(curYear,curMonth);
+
+            instance.updateDataUI();//重置月份
             instance.setVisible(false);
         }
 
