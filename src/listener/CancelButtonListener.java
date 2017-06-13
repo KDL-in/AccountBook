@@ -2,6 +2,7 @@ package listener;
 
 import frame.MFrame;
 import panel.JChartPanel;
+import panel.OperatePanel;
 import panel.SettingPanel;
 import util.ImageUtil;
 
@@ -15,6 +16,7 @@ public class CancelButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         SettingPanel.getInstance().resetAllFlag();
+        OperatePanel.getInstance().updateDataUI();
         MFrame.getInstance().setMainPanel();
         MFrame.getInstance().setVisible(true);
     }

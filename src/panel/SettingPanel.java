@@ -32,7 +32,7 @@ public class SettingPanel extends JPanel {
     public JButton cancelButton;
     public JTable jTable;
 
-    private JButton addButton, resetButton, deleButton;
+    private JButton addButton, resetButton, deleteButton;
     private JButton bakButton, recButton;
 
     //data
@@ -76,11 +76,12 @@ public class SettingPanel extends JPanel {
         applyButton.addActionListener(new ApplyButtonListener());
         okButton.addActionListener(new OkButtonListener());
         addButton.addActionListener(new AddButtonListener());
-        deleButton.addActionListener(new DeleteButtonListener());
+        deleteButton.addActionListener(new DeleteButtonListener());
         resetButton.addActionListener(new ResetButtonListener());
         settingTableModel.addTableModelListener(new SettingTableModelListener());
         bakButton.addActionListener(new BakButtonListener());
         recButton.addActionListener(new RecButtonListener());
+        cancelButton.addActionListener(new CancelButtonListener());
     }
 
     private void initCategoryPanel() {
@@ -109,11 +110,11 @@ public class SettingPanel extends JPanel {
         JPanel buttonPanel = new JPanel(new FlowLayout());
         addButton = new JButton("新增");
         resetButton = new JButton("重置");
-        deleButton = new JButton("删除");
-        FontUtil.setFont(FontUtil.yahei15Font, addButton, resetButton, deleButton);
+        deleteButton = new JButton("删除");
+        FontUtil.setFont(FontUtil.yahei15Font, addButton, resetButton, deleteButton);
         buttonPanel.add(addButton);
         buttonPanel.add(resetButton);
-        buttonPanel.add(deleButton);
+        buttonPanel.add(deleteButton);
         //add
         jPanel.add(jScrollPane, BorderLayout.CENTER);
         jPanel.add(buttonPanel, BorderLayout.SOUTH);
@@ -165,8 +166,7 @@ public class SettingPanel extends JPanel {
         confirmPanel.add(okButton);
         confirmPanel.add(cancelButton);
         confirmPanel.add(applyButton);
-        //add listener
-        cancelButton.addActionListener(new CancelButtonListener());
+
         //add
         settingLabelPanel.add(costSettingPanel, BorderLayout.NORTH);
         settingLabelPanel.add(bakAndRecPanel, BorderLayout.CENTER);

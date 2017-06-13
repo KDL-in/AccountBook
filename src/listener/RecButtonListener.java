@@ -1,5 +1,6 @@
 package listener;
 
+import panel.OperatePanel;
 import panel.SettingPanel;
 import util.DBUtil;
 
@@ -23,5 +24,6 @@ public class RecButtonListener implements ActionListener {
         //更新界面数据
         instance.updateUIData();
         instance.changeTable();
+        OperatePanel.getInstance().readData();
     }
 }
