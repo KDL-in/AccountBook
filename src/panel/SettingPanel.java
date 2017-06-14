@@ -1,5 +1,6 @@
 package panel;
 
+import dao.BudgetDAO;
 import dao.CategoryDAO;
 import dao.TempCategorysDAO;
 import entity.Category;
@@ -130,7 +131,7 @@ public class SettingPanel extends JPanel {
         JPanel costSettingPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel costSettingLabel = new JLabel("本月预算：");
         budgetSettingField = new JTextField(15);
-        budgetSettingField.setText("800.00");
+        budgetSettingField.setText(BudgetDAO.getBudget() + ".00");
         budgetSettingField.setHorizontalAlignment(JTextField.CENTER);
         costSettingPanel.add(costSettingLabel);
         costSettingPanel.add(budgetSettingField);
@@ -214,7 +215,7 @@ public class SettingPanel extends JPanel {
         return budgetChanged;
     }
 
-    public void resetTempCategory() {
+    public void updateDataUI() {
         java.util.List<Category> categories = CategoryDAO.getList();
         settingTableModel.getDataVector().clear();
         for (Category c :
@@ -223,7 +224,8 @@ public class SettingPanel extends JPanel {
             settingTableModel.addRow(objects);
         }
     }
-//备份还原相关
+
+    //备份还原相关
     public void showBakPathChooser() {
         File file = new File(currentDirectoryPath);
         if (!file.exists()) file.mkdir();
@@ -247,7 +249,7 @@ public class SettingPanel extends JPanel {
 
     public void showRecBakPathChooser() {
         File file = new File(currentDirectoryPath);
-        if(!file.exists()) file.mkdir();
+        if (!file.exists()) file.mkdir();
 
         JFileChooser jFileChooser = new JFileChooser(currentDirectoryPath);
         jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -259,8 +261,8 @@ public class SettingPanel extends JPanel {
     }
 
     public boolean isRecPathIllegal() {
-        if(recPath==null) return true;
-        String name = recPath.substring(recPath.length()-6);
+        if (recPath == null) return true;
+        String name = recPath.substring(recPath.length() - 6);
         return name.compareTo("DB.bak") != 0;
     }
 

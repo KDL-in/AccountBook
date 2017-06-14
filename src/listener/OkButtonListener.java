@@ -16,11 +16,11 @@ public class OkButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         SettingPanel instance = SettingPanel.getInstance();
         if (instance.isBudgetChange()) {
-            BudgetDAO.alter(instance.getNewBudget());
+            BudgetDAO.setBudget(instance.getNewBudget());
             OperatePanel.getInstance().readData();
             //相关更新
             OperatePanel.getInstance().updateDataUI();
-            instance.budgetSettingField.setText(OperatePanel.getInstance().budget+".00");
+            instance.budgetSettingField.setText(BudgetDAO.getBudget()+".00");
         }
         if(instance.isTableChange()){
             instance.updateTempCategorys();

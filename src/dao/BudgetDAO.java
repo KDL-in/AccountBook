@@ -1,11 +1,6 @@
 package dao;
 
-import util.DBUtil;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.*;
 
 /**
  * Created by KundaLin on 17/6/6.
@@ -13,27 +8,53 @@ import java.sql.SQLException;
 public class BudgetDAO {
     public static int getBudget() {
         int budget = 0;
-        Connection connection = DBUtil.getConnection();
+        FileReader fileReader = null;
+        BufferedReader bufferedReader = null;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("select budget from BUDGET where bid = 1");
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                budget = resultSet.getInt("budget");
-            }
-        } catch (SQLException e) {
+            fileReader = new FileReader("./config");
+            bufferedReader = new BufferedReader(fileReader);
+            String s = bufferedReader.readLine();
+            budget = Integer.parseInt(s.substring(7));
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if(fileReader!=null) try {
+                fileReader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if(bufferedReader!=null)try {
+                bufferedReader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return budget;
     }
 
-    public static void alter(int budget) {
-        Connection connection = DBUtil.getConnection();
+    public static void setBudget(int budget) {
+        FileWriter fileWriter = null;
+        BufferedWriter bufferedWriter = null;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Budget set budget = ? WHERE bid = 1");
-            preparedStatement.setInt(1,budget);
-            preparedStatement.execute();
-        } catch (SQLException e) {
+            fileWriter = new FileWriter("./config");
+            bufferedWriter = new BufferedWriter(fileWriter);
+            String s = "Budget=" + budget;
+            bufferedWriter.write(s);
+        } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            if(bufferedWriter!=null)try {
+                bufferedWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (fileWriter!=null)try {
+                fileWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

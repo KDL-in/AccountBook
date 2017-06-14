@@ -12,7 +12,7 @@ public class ResetButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         SettingPanel instance = SettingPanel.getInstance();
-        instance.resetTempCategory();
+        instance.updateDataUI();
         instance.changeTable();
     }
 }
