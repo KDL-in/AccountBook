@@ -82,7 +82,7 @@ public class JChartPanel extends JPanel {
         DefaultPieDataset defaultPieDataset = new DefaultPieDataset();
         for (Category c :
                 typeList) {
-            if(cidTospend.get(c.cid)>0)
+            if(cidTospend.containsKey(c.cid)&&cidTospend.get(c.cid)>0)
              defaultPieDataset.setValue(cidTocname.get(c.cid),cidTospend.get(c.cid));
         }
         //build chart

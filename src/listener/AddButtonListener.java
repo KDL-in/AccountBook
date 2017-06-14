@@ -22,6 +22,10 @@ public class AddButtonListener implements ActionListener {
                 JOptionPane.showMessageDialog(null, "不能为空");
                 return;
             }
+            if (newType.trim().length() > 5) {
+                JOptionPane.showMessageDialog(null, "标签最大长度5）");
+                return;
+            }
             Object o[]={newType,0};
             instance.settingTableModel.insertRow(row,o);
             instance.changeTable();

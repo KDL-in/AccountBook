@@ -11,7 +11,7 @@ public class BudgetDAO {
         FileReader fileReader = null;
         BufferedReader bufferedReader = null;
         try {
-            fileReader = new FileReader("./config");
+            fileReader = new FileReader("plugins/config");
             bufferedReader = new BufferedReader(fileReader);
             String s = bufferedReader.readLine();
             budget = Integer.parseInt(s.substring(7));
@@ -38,7 +38,7 @@ public class BudgetDAO {
         FileWriter fileWriter = null;
         BufferedWriter bufferedWriter = null;
         try {
-            fileWriter = new FileWriter("./config");
+            fileWriter = new FileWriter("plugins/config");
             bufferedWriter = new BufferedWriter(fileWriter);
             String s = "Budget=" + budget;
             bufferedWriter.write(s);
