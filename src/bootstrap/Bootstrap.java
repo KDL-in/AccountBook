@@ -17,19 +17,17 @@ import java.lang.reflect.InvocationTargetException;
 public class Bootstrap {
     public static void main(String[] args) throws InvocationTargetException, InterruptedException {
         GUIUtil.useSkin();
+        DBUtil.initDB();
         DBUtil.autoIncreasing();
-        SwingUtilities.invokeAndWait(new Runnable() {
-            @Override
-            public void run() {
-                MFrame mFrame = MFrame.getInstance();
-                mFrame.setLayout(new BorderLayout());
-                mFrame.setResizable(false);
-                mFrame.addWindowListener(new MFrameCloseListener());
-                mFrame.setMainPanel();
-                mFrame.pack();
-                mFrame.setLocationRelativeTo(null);
-                mFrame.setVisible(true);
-            }
+        SwingUtilities.invokeAndWait(() -> {
+            MFrame mFrame = MFrame.getInstance();
+            mFrame.setLayout(new BorderLayout());
+            mFrame.setResizable(false);
+            mFrame.addWindowListener(new MFrameCloseListener());
+            mFrame.setMainPanel();
+            mFrame.pack();
+            mFrame.setLocationRelativeTo(null);
+            mFrame.setVisible(true);
         });
     }
 }

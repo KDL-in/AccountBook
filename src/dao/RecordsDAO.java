@@ -14,6 +14,7 @@ import java.util.*;
 public class RecordsDAO {
 
     public static void add(Record readRecord) {
+        DBUtil.isHaveData = true;
         Connection connection = DBUtil.getConnection();
         try {
             PreparedStatement preparedStatement =
