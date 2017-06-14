@@ -155,7 +155,7 @@ public class RecordsDAO {
         try {
             Connection connection = DBUtil.getConnection();
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("select Max(rdate) from Records");
+                    connection.prepareStatement("use WalletDB select Max(rdate) from Records");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 lastAddDate = resultSet.getDate(1);

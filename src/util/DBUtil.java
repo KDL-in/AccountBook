@@ -20,7 +20,9 @@ public class DBUtil {
     static{
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            connection = DriverManager.getConnection("jdbc:sqlserver://127.0.0.1:1433;DatabaseName=WalletDB", "kundalin", "123");
+//            connection = DriverManager.getConnection("jdbc:sqlserver://127.0.0.1:1433;DatabaseName=WalletDB", "kundalin", "123");
+            connection = DriverManager.getConnection("jdbc:sqlserver://127.0.0.1:1433;DatabaseName=WalletDB", "sa", "");
+//            connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;integratedSecurity=true");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -39,9 +41,9 @@ public class DBUtil {
         Long time;
         if(startTime==endTime)
             return;
-        List<TempCategory> incleacingRecords = TempCategorysDAO.getAutoIncreacingList();//读取自动增长
+        List<TempCategory> increasingRecords = TempCategorysDAO.getAutoIncreacingList();//读取自动增长
         for (TempCategory t :
-                incleacingRecords) {
+                increasingRecords) {
             Record newRecord = new Record();
             newRecord.spend = t.delta;
             newRecord.cid = CategoryDAO.InquryCid(t.tcname);
@@ -95,6 +97,14 @@ public class DBUtil {
         try{
             PreparedStatement preparedStatement = connection.prepareStatement("use WalletDB");
             preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void close() {
+        try {
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

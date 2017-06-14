@@ -1,6 +1,7 @@
 package bootstrap;
 
 import frame.MFrame;
+import listener.MFrameCloseListener;
 import util.DBUtil;
 import util.GUIUtil;
 
@@ -23,7 +24,7 @@ public class Bootstrap {
                 MFrame mFrame = MFrame.getInstance();
                 mFrame.setLayout(new BorderLayout());
                 mFrame.setResizable(false);
-                mFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                mFrame.addWindowListener(new MFrameCloseListener());
                 mFrame.setMainPanel();
                 mFrame.pack();
                 mFrame.setLocationRelativeTo(null);
