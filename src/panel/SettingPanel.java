@@ -41,7 +41,7 @@ public class SettingPanel extends JPanel {
     private int budgetChanged;
     private boolean typesChanged;
 
-    private String currentDirectoryPath = "F:\\学校\\个人理财\\bak";
+    private String currentDirectoryPath = "plugins/bak";
 
 
     private String bakPath;

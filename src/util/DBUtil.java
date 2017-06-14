@@ -6,7 +6,6 @@ import dao.TempCategorysDAO;
 import entity.Category;
 import entity.Record;
 import entity.TempCategory;
-import panel.SettingPanel;
 
 import java.io.*;
 import java.sql.*;
@@ -45,7 +44,7 @@ public class DBUtil {
         Long time;
         if (startTime == endTime)
             return;
-        List<TempCategory> increasingRecords = TempCategorysDAO.getAutoIncreacingList();//读取自动增长
+        List<TempCategory> increasingRecords = TempCategorysDAO.getAutoIncreasingList();//读取自动增长
         for (TempCategory t :
                 increasingRecords) {
             Record newRecord = new Record();
@@ -126,11 +125,12 @@ public class DBUtil {
                 dbFile.getAbsolutePath() + "' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )LOG ON ( NAME = N'WalletDB_log', FILENAME = N'" +
                 dbLogFile.getAbsolutePath() + "' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )";
         sqls.add(str);
-        FileReader fileReader = null;
+        InputStreamReader inputStreamReader = null;
         BufferedReader bufferedReader = null;
         try {
-            fileReader = new FileReader("plugins/data.ini");
-            bufferedReader = new BufferedReader(fileReader);
+//            fileReader = new FileReader("plugins/data.ini");
+            inputStreamReader =new InputStreamReader(new FileInputStream(new File("plugins/data.ini")),"UTF-8");
+            bufferedReader = new BufferedReader(inputStreamReader);
             String s;
             while ((s = bufferedReader.readLine()) != null) {
                 sqls.add(s);
@@ -141,8 +141,8 @@ public class DBUtil {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (fileReader != null) try {
-                fileReader.close();
+            if (inputStreamReader != null) try {
+                inputStreamReader.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -155,7 +155,6 @@ public class DBUtil {
         //执行
         for (String sql :
                 sqls) {
-            System.out.println(sql);
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.execute();

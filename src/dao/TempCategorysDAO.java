@@ -58,7 +58,7 @@ public class TempCategorysDAO {
         }
     }
 
-    public static List<TempCategory> getAutoIncreacingList() {
+    public static List<TempCategory> getAutoIncreasingList() {
         List<TempCategory>result= new ArrayList<>();
         try {
             Connection connection = DBUtil.getConnection();
