@@ -6,7 +6,10 @@ import dao.TempCategorysDAO;
 import entity.Category;
 import entity.Record;
 import entity.TempCategory;
+import frame.MFrame;
 
+import javax.swing.*;
+import java.awt.event.WindowEvent;
 import java.io.*;
 import java.sql.*;
 import java.sql.Date;
@@ -107,61 +110,31 @@ public class DBUtil {
     }
 
     public static void close() {
-        try {
+        if(connection!=null)try {
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public static void initDB() {
+    public static void checkDB() {
         File dbFile = new File("plugins/data/WalletDB.mdf");
-        File dbLogFile = new File("plugins/data/WalletDB_log.ldf");
-        if(dbFile.exists())return;
-        //读取sql脚本
-        ArrayList<String> sqls = new ArrayList<>();
-        sqls.add("USE [master]");
-        String str = "CREATE DATABASE [WalletDB] ON  PRIMARY ( NAME = N'WalletDB', FILENAME = N'" +
-                dbFile.getAbsolutePath() + "' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )LOG ON ( NAME = N'WalletDB_log', FILENAME = N'" +
-                dbLogFile.getAbsolutePath() + "' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )";
-        sqls.add(str);
-        InputStreamReader inputStreamReader = null;
-        BufferedReader bufferedReader = null;
+        if(dbFile.exists()||!isDBNotExist())return;
+        JOptionPane.showMessageDialog(null, "无法启动，请运行initDB.exe或查看README.txt");
+        close();
+        System.exit(0);
+    }
+
+    private static boolean isDBNotExist() {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         try {
-//            fileReader = new FileReader("plugins/data.ini");
-            inputStreamReader =new InputStreamReader(new FileInputStream(new File("plugins/data.ini")),"UTF-8");
-            bufferedReader = new BufferedReader(inputStreamReader);
-            String s;
-            while ((s = bufferedReader.readLine()) != null) {
-                sqls.add(s);
-            }
-
-        } catch (FileNotFoundException e) {
+            preparedStatement = connection.prepareStatement("select * From master.dbo.sysdatabases where name='WalletDB'");
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()) return false;
+        } catch (SQLException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (inputStreamReader != null) try {
-                inputStreamReader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (bufferedReader != null) try {
-                bufferedReader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
-        //执行
-        for (String sql :
-                sqls) {
-            try {
-                PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.execute();
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+        return true;
     }
 }
