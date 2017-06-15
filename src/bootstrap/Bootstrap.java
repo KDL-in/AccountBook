@@ -7,8 +7,6 @@ import util.GUIUtil;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -17,7 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 public class Bootstrap {
     public static void main(String[] args) throws InvocationTargetException, InterruptedException {
         GUIUtil.useSkin();
-        DBUtil.initDB();
+        DBUtil.checkDB();
         DBUtil.autoIncreasing();
         SwingUtilities.invokeAndWait(() -> {
             MFrame mFrame = MFrame.getInstance();
